@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+    <script src="{% static 'script.js' %}"></script>
+    <title>ThisApiForThat</title>
+</head>
+<body>
+    <div class="center">
+        <div class="content">
+            <h2>Hey, maybe you can use</h2>
+            <h1>{{ api.name }}Placeholder</h1>
+            <h3>API for</h3>
+            <h4>{{ api.description }}Another Placeholder</h4>
+        </div>
+
+        {# a button to get another random values #}
+        <a href="{{ as }}">
+            <button class="button">Get Another</button>
+        </a>
+
+    </div>
+{#    div on right side for code example#}
+    <div class="right">
+        <div class="codeheader" id="codeheader_html">{{ html }}</div>
+        <div id="codebox">
+            <code>
+                <p>dsdsdasjkdasdasj asdbjkasbdjabsjd sabdjkasbdjkbasjkdb asbdjkabsdjkbasd asbdkjasbdjkbasjkd sabdjkbasjkdbas asbdjkbaskjdb</p>
+            </code>
+            <a href="{{ as }}">
+            <button class="button" id="tryAPI">try API</button>
+            </a>
+        </div>
+    </div>
+    {#    setting icon on which click open a menu #}
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Clients</a>
+        <a href="#">Contact</a>
+    </div>
+    <a class="icon-info">
+        <img src="{% static 'info-64.png' %}" alt="icon" onclick="openNav()" class="openbtn">
+    </a>
+</body>
+</html>
