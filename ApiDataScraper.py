@@ -22,7 +22,7 @@ dataModel = {
     "type": "",
     "tryMe": "",
     "auth": "",
-    "working": 1,
+    "working": True,
 }
 
 # make a connection to the MongoDB database
@@ -89,7 +89,7 @@ for api in search[1:]:
 
 # dbAPI.update_many(
 #   {},
-#   {"$set": {"working": 1}}
+#   {"$set": {"working": True}}
 # )
 
 # ------------------------------------ #
