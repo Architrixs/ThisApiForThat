@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from ThisApiForThatThing.views import MainPageView
+from ThisApiForThatThing.views import MainPageView, RandomDataView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', MainPageView.as_view(), name='home'),
+    path('api/random/', RandomDataView.as_view(), name='random'),
 ]

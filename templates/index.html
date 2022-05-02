@@ -11,13 +11,13 @@
     <div class="center">
         <div class="content">
             <h2>Hey, maybe you can use</h2>
-            <h1>{{ api.name }}Placeholder</h1>
+            <h1>{{ api.name }}</h1>
             <h3>API for</h3>
-            <h4>{{ api.description }}Another Placeholder</h4>
+            <h4>{{ api.description }}</h4>
         </div>
 
         {# a button to get another random values #}
-        <a href="{{ as }}">
+        <a href="{{ '' }}">
             <button class="button">Get Another</button>
         </a>
 
@@ -27,9 +27,9 @@
         <div class="codeheader" id="codeheader_html">{{ html }}</div>
         <div id="codebox">
             <code>
-                <p>dsdsdasjkdasdasj asdbjkasbdjabsjd sabdjkasbdjkbasjkdb asbdjkabsdjkbasd asbdkjasbdjkbasjkd sabdjkbasjkdbas asbdjkbaskjdb</p>
+                <p>{{ api.tryMe }}</p>
             </code>
-            <a href="{{ as }}">
+            <a href="{{ api.tryMe }}">
             <button class="button" id="tryAPI">try API</button>
             </a>
         </div>
