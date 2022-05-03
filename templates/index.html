@@ -8,32 +8,29 @@
     <title>ThisApiForThat</title>
 </head>
 <body>
-    <div class="center">
-        <div class="content">
-            <h2>Hey, maybe you can use</h2>
-            <h1>{{ api.name }}</h1>
-            <h3>API for</h3>
-            <h4>{{ api.description }}</h4>
-        </div>
+    <div class="content">
+        <h2>Hey, maybe you can use</h2>
+        <h1>{{ api.name }}</h1>
+        <h3>API for</h3>
+        <div class="center"><h4>{{ api.description }}</h4></div>
 
-        {# a button to get another random values #}
-        <a href="{{ '' }}">
-            <button class="button">Get Another</button>
-        </a>
-
-    </div>
+    {# a button to get another random values #}
+    <a href="{{ '' }}">
+        <button class="button" id="refresh">Get Another</button>
+    </a>
 {#    div on right side for code example#}
     <div class="right">
         <div class="codeheader" id="codeheader_html">{{ html }}</div>
         <div id="codebox">
             <code>
-                <p>{{ api.tryMe }}</p>
+                <p>{{ api.tryMe }}hkhkj ghkgk hgkgkjhb hkjhjlb gboujbjvuvf</p>
             </code>
-            <a href="{{ api.tryMe }}">
+            <a href="{{ api.tryMe }}" target="_blank">
             <button class="button" id="tryAPI">try API</button>
             </a>
         </div>
     </div>
+         </div>
     {#    setting icon on which click open a menu #}
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>

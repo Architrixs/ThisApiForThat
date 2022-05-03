@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from ThisApiForThatThing.views import MainPageView, RandomDataView
+from ThisApiForThatThing.views import MainPageView, RandomDataCall, TypeDataCall, AllTypes
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', MainPageView.as_view(), name='home'),
-    path('api/random/', RandomDataView.as_view(), name='random'),
+    path('api/random/', RandomDataCall.as_view(), name='random'),
+    path('api/types/', AllTypes.as_view(), name='types'),
+    path('api/types/<str:type>', TypeDataCall.as_view(), name='type'),
 ]

@@ -10,12 +10,8 @@ body {
 }
 /*center div horizontally and vertically*/
 .center {
-  position: absolute;
-  left: 45%;
-  top: 40%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  transition: margin-left .5s;
+  width: 70%;
+  margin: auto;
 }
 h2 {
   color: #fd976e;
@@ -43,7 +39,7 @@ h4 {
   -webkit-text-stroke-color: black;
 }
 p {
-
+  overflow-wrap: anywhere !important;
 }
 /* green floating button at the bottom*/
 .button {
@@ -58,6 +54,12 @@ p {
   font-size: 1em;
   margin-top: 7vh;
   cursor: pointer;
+}
+#refresh {
+  position: fixed !important;
+  top: 80%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 #tryAPI {
   margin: 4px;
@@ -111,9 +113,9 @@ p {
 }
 .right{
   width: 230px;
-  top: 45%;
-  position: absolute;
-  left: 80%;
+  top: 85%;
+  position: fixed;
+  left: 85%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
@@ -129,8 +131,8 @@ p {
 }
 #codebox {
   padding: 1px;
-  font-size: 1.5em;
-  line-height: 1.3;
+  font-size: 1.2em;
+  line-height: 1.2;
   color: #7b2a09;
   background-color: #ffc9936b;
   -webkit-border-radius: 0px 0px 6px 6px;
@@ -141,25 +143,28 @@ p {
   .sidebar {padding-top: 15px;}
   .sidebar a {font-size: 18px;}
 /*  move class right to bottom of page*/
+  .content {
+    margin-top: 60px;
+  }
   .right {
-    position: absolute;
-    top: 100%;
+    position: absolute !important;
+    top: 110%;
     left: 50%;
   }
-  .center {
-    position: absolute;
-    left: 50%;
+  #refresh {
+    position: absolute !important;
+    top: 85%;
   }
   h2 {
-  font-size: 1.75em;
+  font-size: 2em;
   }
   h3 {
     color: #fd976e;
-    font-size: 1.25em;
+    font-size: 1.5em;
   }
   h1 {
     color: #46bdf2;
-    font-size: 2em;
+    font-size: 2.5em;
   }
   h4 {
     color: #46bdf2;
