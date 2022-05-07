@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Asap:wght@600&display=swap');
 /*add a abstract backgroung image*/
 body {
   background-image: url("hand-painted-watercolor-background-with-sky-clouds-shape.jpg");
@@ -5,13 +6,16 @@ body {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  font-family: "Britannic Bold";
+  font-family: 'Asap', "Britannic Bold", "arial", serif;
   text-align: center;
 }
 /*center div horizontally and vertically*/
 .center {
   width: 70%;
   margin: auto;
+}
+a {
+  text-decoration: none;
 }
 h2 {
   color: #fd976e;
@@ -64,7 +68,7 @@ p {
 #tryAPI {
   margin: 4px;
   background-color: #62bae8;
-  color: #134860;
+
   font-size: 0.7em;
   line-height: 0.6;
 }
@@ -76,7 +80,10 @@ p {
   left: 0;
   display: inline-block;
   vertical-align: middle;
-  scale: 50%;
+  -webkit-transform: scale(0.5);
+  -moz-transform: scale(0.5);
+  -o-transform: scale(0.5);
+  transform: scale(0.5);
 }
 .sidebar {
   height: 100%;
@@ -116,14 +123,15 @@ p {
   top: 85%;
   position: fixed;
   left: 85%;
+  bottom: -15%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
 .codeheader {
   padding: 10px 5px 5px 10px;
   font-family: 'Roboto', sans-serif;
-  font-size: 1.1em;
-  color: #fff;
+  font-size: 0.8em;
+  color: #134860;
   -webkit-border-radius: 6px 6px 0px 0px;
   -moz-border-radius: 6px 6px 0px 0px;
   border-radius: 6px 6px 0px 0px;
@@ -173,3 +181,7 @@ p {
   }
 }
 
+/* media query for big screen */
+@media screen and (max-width: 1000px) {
+
+}
