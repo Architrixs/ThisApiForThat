@@ -42,6 +42,10 @@ h4 {
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
 }
+#keyInfo{
+  font-size: 0.5em;
+  -webkit-text-stroke-width: 0;
+}
 p {
   overflow-wrap: anywhere !important;
 }
