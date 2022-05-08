@@ -14,12 +14,12 @@ try:
     db = client['Api']
 
     collection = db['ApiForApi']
-    print(collection.find_one())
+
 except ServerSelectionTimeoutError:
     print("Server not found")
     exit()
 
-
+# section for webpage
 # main page
 class MainPageView(View):
     def get(self, request):
@@ -28,8 +28,9 @@ class MainPageView(View):
         # return the data
         return render(request, 'index.html', {'api': data})
 
-
+# section for api calls
 class RandomDataCall(View):
+    # returns a random document from the collection
     def get(self, request):
         data = list(collection.aggregate([{'$sample': {'size': 1}}]))[0]
         print(data)
@@ -51,4 +52,16 @@ class AllTypes(View):
         data = list(collection.distinct('type'))
         return JsonResponse(data, status=201, safe=False)
 
+
+# section for modifying data for admin
+class CrudPageView(View):
+    # takes 'id' input from page and returns the data with that id
+    # here we can modify the data and save it to the database
+    def get(self, request):
+        print("11212",request.POST, request.GET.get('id'))
+        # get the id from the page
+        oid = int(request.GET.get('id'))
+        data = collection.find_one({'_id': oid})
+        print(type(oid), data)
+        return render(request, 'crud.html', {'data': data, 'id': oid})
 
