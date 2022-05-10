@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.views.generic.base import RedirectView
 from ThisApiForThatThing.views import MainPageView, RandomDataCall, TypeDataCall, AllTypes, CrudPageView
 
 urlpatterns = [
@@ -23,5 +24,6 @@ urlpatterns = [
     path('api/random/', RandomDataCall.as_view(), name='random'),
     path('api/types/', AllTypes.as_view(), name='types'),
     path('api/types/<str:type>', TypeDataCall.as_view(), name='type'),
-    path('crud/', CrudPageView.as_view(), name='crud'),
+    path('crud/', RedirectView.as_view(url='id=10', permanent=False)),
+    path('crud/id=<int:id>', CrudPageView.as_view(), name='crud'),
 ]

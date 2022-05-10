@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     {% load static %}
     <link rel="stylesheet" href="{% static 'form.css' %}">
-    <title>Title</title>
+    <script src="{% static 'script.js' %}"></script>
+    <title>CRUD</title>
 </head>
 <body>
+
 {# make a form for updating or adding entries to api database according to ApiModel #}
 {#name = models.CharField(max_length=100)#}
 {#    link = models.CharField(max_length=500)#}
@@ -17,69 +19,103 @@
 {#    working = models.BooleanField(default=True)#}
 {#    _id = models.IntegerField(primary_key=True)#}
 
-<div class="card">
-    <h2>API FORM</h2>
-    <div class="row">
-        <form action="/crud/" method="get">{% csrf_token %}
-            <div class="col">
-                <div class="form-group" style="width: 10%;">
-                    <label for="name">Id</label>
-                    <input type="number" name="id" value="{% if data %}{{ id }}{% endif %}">
-                </div>
-
-                <input type="submit" value="OK" style="width: 30%; margin-left: 40%">
-            </div>
-        </form>
+{# add a side bar with 3 tabs: one for API for, second For Types and third for random#}
+<div class="sidebar">
+    <div class="tabs">
+        <div class="tab">
+            <a href="#" onclick=showForm('api')>API</a>
+        </div>
+        <div class="tab">
+            <a href="#" onclick=showForm('types')>Types</a>
+        </div>
+        <div class="tab">
+            <a href="#" onclick=showForm('random')>Random</a>
+        </div>
     </div>
-    <div class="row">
-        <form action="/crud/" method="post">{% csrf_token %}
-            <div class="col">
-                <div class="form-group" style="width: 50%;">
-                    <label>Name</label>
-                    <input type="text" name="name" value="{% if data %}{{ data.name }}{% endif %}">
+</div>
+<div class="card">
+    {#  API  form hide other tab #}
+    <div class="tab-content" id="api">
+        <h2>API FORM</h2>
+        <div class="row">
+            <form action="/crud/id={{ id }}" method="get">{% csrf_token %}
+                <div class="col">
+                    <div class="form-group" style="width: 20%;margin-top: 5px">
+                        <label for="name">Id</label>
+                        <input type="number" name="id" value="{% if data %}{{ id }}{% endif %}">
+                    </div>
+                    <input type="submit" value="OK" style="width: 30%; margin-left: 40%">
+                {# add next and previous buttons #}
+                <div style="width: 20%;margin: 5px; float: right">
+{#                    arrow right character #}
+                    <a href="/crud/id={% if data %}{{ id |add:1 }}{% else %}1{% endif %}" onclick=nextId() style="font-size: 2em; color: rgb(29, 13, 142);">&#187;</a>
                 </div>
-            </div>
-            <div class="col">
-                <div class="form-group">
-                    <label>Link</label>
-                    <input type="text" name="link" value="{% if data %}{{ data.link }}{% endif %}">
+                <div style="width: 20%;margin: 5px; float: right">
+{#                    arrow left character #}
+                    <a href="/crud/id={% if data %}{{ id | add:-1 }}{% else %}1{% endif %}" onclick=previousId() style="font-size: 2em;color: rgb(29, 13, 142);">&#171;</a>
                 </div>
-            </div>
-            <div class="col">
-                <div class="form-group">
-                    <label>Description</label>
-                    <input type="text" name="description" value="{% if data %}{{ data.description }}{% endif %}">
                 </div>
-            </div>
-            <div class="col">
-                <div class="form-group" style="width: 60%;">
-                    <label>Type</label>
-                    <input type="text" name="type" value="{% if data %}{{ data.type }}{% endif %}">
-                </div>
-            </div>
-            <div class="col">
-                <div class="form-group">
-                    <label>TryMe</label>
-                    <input type="text" name="tryMe" value="{% if data %}{{ data.tryMe }}{% endif %}">
-                </div>
-            </div>
-            <div class="col">
-                <div class="form-group" style="width: 30%;">
-                    <label>Auth</label>
-                    <input type="text" name="auth" value="{% if data %}{{ data.auth }}{% endif %}">
-                </div>
-            </div>
-            <div class="col">
-                <div class="form-group" style="width: 10%;">
-                    <label>Working</label>
-                    <input type="checkbox" name="working" value="{% if data %}{{ data.working }}{% endif %}">
-                </div>
-            </div>
-            <div class="col">
-                <input type="submit" value="Submit">
-            </div>
-        </form>
 
+
+            </form>
+        </div>
+        <div class="row">
+            <form action="/crud/id={{ id }}" method="post">{% csrf_token %}
+                <div class="col">
+                    <div class="form-group" style="width: 50%;">
+                        <label>Name</label>
+                        <input type="text" name="name" value="{% if data %}{{ data.name }}{% endif %}">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label>Link</label>
+                        <input type="text" name="link" value="{% if data %}{{ data.link }}{% endif %}">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input type="text" name="description" value="{% if data %}{{ data.description }}{% endif %}">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group" style="width: 60%;">
+                        <label>Type</label>
+                        <input type="text" name="type" value="{% if data %}{{ data.type }}{% endif %}">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label>TryMe</label>
+                        <input type="text" name="tryMe" value="{% if data %}{{ data.tryMe }}{% endif %}">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group" style="width: 30%;">
+                        <label>Auth</label>
+                        <input type="text" name="auth" value="{% if data %}{{ data.auth }}{% endif %}">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group" style="width: 10%;">
+                        <label>Working</label>
+                        <input type="checkbox" name="working" value="{% if data %}{{ data.working }}{% endif %}"
+                               {% if data.working %}checked{% endif %}>
+                    </div>
+                </div>
+                <div class="col">
+                    <input type="submit" value="Submit">
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <div class="tab-content" id="types" style="display: none;">
+        <h2>TYPES FORM</h2>
+    </div>
+    <div class="tab-content" id="random" style="display: none;">
+        <h2>RANDOM FORM</h2>
     </div>
 </div>
 
