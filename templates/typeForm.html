@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'form.css' %}">
+    <script src="{% static 'script.js' %}"></script>
+    <title>crud/type</title>
+</head>
+<body>
+
+{# add a side bar with 3 tabs: one for API for, second For Types and third for random#}
+<div class="sidebar">
+    <div class="tabs">
+        <div class="tab">
+            <a href="/crud">API</a>
+        </div>
+        <div class="tab">
+            <a href="types">Types</a>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="tab-content" id="types">
+        <h2>TYPES FORM</h2>
+        {% for type in types %}
+            <div class="row">
+                <form action="{% url 'crudTypes' %}" method="post">{% csrf_token %}
+                    <div class="col">
+                        <div class="form-group"  style="display: none">
+                            <input type="text" name="original_type" value="{{ type }}" style="display: none">
+                        </div>
+                        <div class="form-group">
+                            {{ forloop.counter }}.
+                            <input type="text" name="type" value="{{ type }}" style="width: 80%;">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group" style="height: 60px; width: 60%">
+                            <input type="submit" value="update">
+                        </div>
+                    </div>
+                    <hr>
+                </form>
+            </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+</body>
+</html>

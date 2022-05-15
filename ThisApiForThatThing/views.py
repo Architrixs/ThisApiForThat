@@ -103,12 +103,12 @@ class CrudPageViewWithTypes(View):
         return render(request, 'typeForm.html', {'types': data})
 
 #     update type
-    def post(self, request, type):
-        data = request.POST
-        print(data)
+    def post(self, request):
+        type = request.POST.get('type')
+        original_type = request.POST.get('original_type')
         # update all the data with the type
-        collection_ApiForApi.update_many({'type': type}, {'$set': {'type': data['type']}})
-        return redirect('crudType', type=data['type'])
+        collection_ApiForApi.update_many({'type': original_type}, {'$set': {'type': type}})
+        return redirect('crudTypes')
 
 
 # make the api call for meta data
