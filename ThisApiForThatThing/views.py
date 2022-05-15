@@ -80,7 +80,7 @@ class CrudPageView(View):
         data = collection_ApiForApi.find_one({'_id': oid})
         print(data, oid, id, request)
         # return render(request, 'crud.html', {'data': data, 'id': oid})
-        return redirect('crud', id=oid)
+        return redirect('crudId', id=oid)
 
     # post method to save the data
     def post(self, request, id=1):
@@ -92,6 +92,23 @@ class CrudPageView(View):
         # save the data to the database according to the ApiModel
         ApiModel(oid, data['type'], data['name'], data['description'], data['link'], data['method'], data['parameters'],
                  data['response'], data['status']).save()
+
+
+class CrudPageViewWithTypes(View):
+    def get(self, request):
+        # get type from the page
+        # get the data from the database
+        data = list(collection_ApiForApi.distinct('type'))
+        print(data)
+        return render(request, 'typeForm.html', {'types': data})
+
+#     update type
+    def post(self, request, type):
+        data = request.POST
+        print(data)
+        # update all the data with the type
+        collection_ApiForApi.update_many({'type': type}, {'$set': {'type': data['type']}})
+        return redirect('crudType', type=data['type'])
 
 
 # make the api call for meta data

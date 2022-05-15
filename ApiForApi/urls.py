@@ -17,15 +17,16 @@ from django.contrib import admin
 from django.urls import path
 from django.views.generic.base import RedirectView
 from ThisApiForThatThing.views import MainPageView, RandomDataCall, TypeDataCall, AllTypes, \
-    CrudPageView, MetaDataCall, CrudPageViewWithId
+    CrudPageView, MetaDataCall, CrudPageViewWithId, CrudPageViewWithTypes
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', MainPageView.as_view(), name='home'),
     path('api/random/', RandomDataCall.as_view(), name='random'),
-    path('api/types/', AllTypes.as_view(), name='types'),
+    path('api/types/', AllTypes.as_view()),
     path('api/types/<str:type>', TypeDataCall.as_view(), name='type'),
-    path('crud/id=<int:id>', CrudPageViewWithId.as_view(), name='crud'),
-    path('crud/', CrudPageView.as_view(), name='crudId'),
+    path('crud/id=<int:id>', CrudPageViewWithId.as_view(), name='crudId'),
+    path('crud/', CrudPageView.as_view(), name='crud'),
     path('api/meta/', MetaDataCall.as_view(), name='meta'),
+    path('crud/types', CrudPageViewWithTypes.as_view(), name='crudTypes'),
 ]

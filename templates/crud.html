@@ -23,13 +23,10 @@
 <div class="sidebar">
     <div class="tabs">
         <div class="tab">
-            <a href="#" onclick=showForm('api')>API</a>
+            <a href="#">API</a>
         </div>
         <div class="tab">
-            <a href="#" onclick=showForm('types')>Types</a>
-        </div>
-        <div class="tab">
-            <a href="#" onclick=showForm('random')>Random</a>
+            <a href="types">Types</a>
         </div>
     </div>
 </div>
@@ -38,22 +35,24 @@
     <div class="tab-content" id="api">
         <h2>API FORM</h2>
         <div class="row">
-            <form action="{% url 'crudId' %}" method="get">
+            <form action="{% url 'crud' %}" method="get">
                 <div class="col">
                     <div class="form-group" style="width: 20%;margin-top: 5px">
                         <label for="name">Id</label>
-                        <input type="number" name="id" value="{% if data %}{{ id }}{% endif %}">
+                        <input type="number" name="id" value="{% if id %}{{ id }}{% endif %}">
                     </div>
                     <input type="submit" value="OK" style="width: 30%; margin-left: 40%">
-                {# add next and previous buttons #}
-                <div style="width: 20%;margin: 5px; float: right">
-{#                    arrow right character #}
-                    <a href="/crud/id={% if data %}{{ id |add:1 }}{% else %}1{% endif %}" onclick=nextId() style="font-size: 2em; color: rgb(29, 13, 142);">&#187;</a>
-                </div>
-                <div style="width: 20%;margin: 5px; float: right">
-{#                    arrow left character #}
-                    <a href="/crud/id={% if data %}{{ id | add:-1 }}{% else %}1{% endif %}" onclick=previousId() style="font-size: 2em;color: rgb(29, 13, 142);">&#171;</a>
-                </div>
+                    {# add next and previous buttons #}
+                    <div style="width: 20%;margin: 5px; float: right">
+                        {#                    arrow right character #}
+                        <a href="/crud/id={% if data %}{{ id |add:1 }}{% else %}1{% endif %}" onclick=nextId()
+                           style="font-size: 2em; color: rgb(29, 13, 142);">&#187;</a>
+                    </div>
+                    <div style="width: 20%;margin: 5px; float: right">
+                        {#                    arrow left character #}
+                        <a href="/crud/id={% if data %}{{ id | add:-1 }}{% else %}1{% endif %}" onclick=previousId()
+                           style="font-size: 2em;color: rgb(29, 13, 142);">&#171;</a>
+                    </div>
                 </div>
 
 
@@ -110,12 +109,6 @@
             </form>
 
         </div>
-    </div>
-    <div class="tab-content" id="types" style="display: none;">
-        <h2>TYPES FORM</h2>
-    </div>
-    <div class="tab-content" id="random" style="display: none;">
-        <h2>RANDOM FORM</h2>
     </div>
 </div>
 

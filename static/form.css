@@ -151,9 +151,11 @@ a {
     .tab {
         float: right;
         margin: 5px;
+        padding-left: 10px;
     }
 
     .sidebar {
+        position: absolute !important;
         left: 20%;
         top: 3%;
     }
