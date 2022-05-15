@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'form.css' %}">
+    <script src="{% static 'script.js' %}"></script>
+    <title>crud/meta</title>
+</head>
+<body>
+
+<div class="sidebar">
+    <div class="tabs">
+        <div class="tab">
+            <a href="/crud">API</a>
+        </div>
+        <div class="tab">
+            <a href="types">Types</a>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="tab-content" id="metaData">
+        <h2>METADATA</h2>
+        {# show json data in pretty form #}
+        <div>
+            <pre>{{ data|safe }}</pre>
+        </div>
+        {# button for updating MetaData#}
+        <div class="row">
+            <form action="/crud/meta" method="post">
+                <div class="col">
+                    <input type="submit" value="Update MetaData">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

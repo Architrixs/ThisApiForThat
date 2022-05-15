@@ -1,3 +1,4 @@
+import requests
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.views import View
@@ -5,11 +6,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from pymongo import MongoClient
 from pymongo.errors import ServerSelectionTimeoutError
 from django.http import JsonResponse
-# import models
+import json
 from .models import ApiModel
 
 # Create your views here.
-
+baseUrl = "http://localhost:8000"
 # connect to mongodb
 try:
     password = 'fcPZp2f4ixQ5QJpj'
@@ -83,7 +84,7 @@ class CrudPageView(View):
         return redirect('crudId', id=oid)
 
     # post method to save the data
-    def post(self, request, id=1):
+    def post(self, request):
         # TODO: save the data to the database
         # get the next id from the database
         oid = collection_ApiForApi.find().sort('_id', -1).limit(1)[0]['_id'] + 1
@@ -119,3 +120,17 @@ class MetaDataCall(View):
         for i in range(len(data)):
             del data[i]['_id']
         return JsonResponse(data, status=201, safe=False)
+
+
+class CrudPageViewWithMetaData(View):
+    def get(self, request):
+        data = requests.get(baseUrl + '/api/meta/')
+        # prettyfy the json
+        data = json.dumps(data.json(), indent=4, sort_keys=True)
+        return render(request, 'meta.html', {'data': data})
+
+    def post(self, request):
+        # TODO: update meta data
+        data = list(collection_ApiForApi.distinct('type'))
+        print(data)
+        return render(request, 'typeForm.html', {'types': data})
