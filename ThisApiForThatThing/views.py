@@ -56,25 +56,31 @@ class TypeDataCall(View):
 class AllTypes(View):
     # returns all the unique types in data
     def get(self, request):
-        #data = list(collection_ApiForApi.distinct('type'))
+        # data = list(collection_ApiForApi.distinct('type'))
         data = collection_MetaData.find_one({'name': 'Types'})['value']
         return JsonResponse(data, status=201, safe=False)
+
+
+class CrudPageViewWithId(View):
+    def get(self, request, id) -> HttpResponse:
+        oid = id
+        data = collection_ApiForApi.find_one({'_id': oid})
+        return render(request, 'crud.html', context={'data': data, 'id': oid})
 
 
 # section for modifying data for admin
 class CrudPageView(View):
     # takes 'id' input from page and returns the data with that id
     # here we can modify the data and save it to the database
-    def get(self, request, id=1):
+    def get(self, request):
         # get the id from the page
-        oid = id
+        oid = 1
         if request.GET.get('id') is not None:
             oid = int(request.GET.get('id'))
         data = collection_ApiForApi.find_one({'_id': oid})
         print(data, oid, id, request)
-        return render(request, 'crud.html', {'data': data, 'id': oid})
-        #return HttpResponseRedirect(f'id={oid}', {'data': data, 'id': oid})
-        #return redirect('/crud/id=' + str(oid))
+        # return render(request, 'crud.html', {'data': data, 'id': oid})
+        return redirect('crud', id=oid)
 
     # post method to save the data
     def post(self, request, id=1):

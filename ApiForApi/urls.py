@@ -16,7 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.views.generic.base import RedirectView
-from ThisApiForThatThing.views import MainPageView, RandomDataCall, TypeDataCall, AllTypes, CrudPageView, MetaDataCall
+from ThisApiForThatThing.views import MainPageView, RandomDataCall, TypeDataCall, AllTypes, \
+    CrudPageView, MetaDataCall, CrudPageViewWithId
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,7 +25,7 @@ urlpatterns = [
     path('api/random/', RandomDataCall.as_view(), name='random'),
     path('api/types/', AllTypes.as_view(), name='types'),
     path('api/types/<str:type>', TypeDataCall.as_view(), name='type'),
-    path('crud/', RedirectView.as_view(url='id=10', permanent=False)),
-    path('crud/id=<int:id>', CrudPageView.as_view(), name='crud'),
+    path('crud/id=<int:id>', CrudPageViewWithId.as_view(), name='crud'),
+    path('crud/', CrudPageView.as_view(), name='crudId'),
     path('api/meta/', MetaDataCall.as_view(), name='meta'),
 ]
