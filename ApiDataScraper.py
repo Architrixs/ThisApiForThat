@@ -11,6 +11,7 @@ import pprint
 from bs4 import BeautifulSoup
 from pymongo import MongoClient
 from pymongo.errors import ServerSelectionTimeoutError
+import ThisApiForThatThing.util as util
 
 pp = pprint.PrettyPrinter(indent=4)
 # api data model
@@ -41,6 +42,11 @@ except ServerSelectionTimeoutError:
 dbAPI = client['Api']['ApiForApi']
 print(dbAPI.find_one())
 
+def checkAlreadyExist(name):
+    # check if same name exists
+    if dbAPI.find_one({"name": name}) is None:
+        return False
+    return True
 # scrape data from the various sources
 
 # ------------------------------------ #
@@ -79,7 +85,6 @@ for api in search[1:]:
         dataModel['type'] = types[count]
         dataModel['tryMe'] = nameAndLink.group(2)
         dataModel['auth'] = data[2] if len(data) >2 else ""
-        dataModel['working'] = 1
         pp.pprint(dataModel)
         # sleep for a bit
         time.sleep(1)
@@ -121,7 +126,6 @@ for tr in trs[1:]:
     dataModel['type'] = 'Miscellaneous'
     dataModel['tryMe'] = data[1].text
     dataModel['auth'] = 'No'
-    dataModel['working'] = 1
     pp.pprint(dataModel)
     # sleep for a bit
     time.sleep(1)
@@ -133,3 +137,52 @@ for tr in trs[1:]:
     index = index + 1
 """
 remaining_ids = [1421,1422,1423,1423,1424,14251428,1429,1431,1432,1433,1434,1435,1436,1437,1441,1442,1443,1445,1446,1447,1448,1449,1450,1451,1453,1454,1456,1455,1458,1459,1460,1461,1462,1464,1467,1469,1470,1471,1472,1473,1474,1479]
+
+
+# ------------------------------------ #
+# from https://public-apis.xyz/page/
+# date: 16/05/2022
+# ------------------------------------ #
+"""
+baseurl = 'https://public-apis.xyz'
+url = 'https://public-apis.xyz/page/'
+for i in range(23,24):
+    print("page", i)
+    print("_________________________________________________")
+    response = requests.get(url+str(i))
+    soup = BeautifulSoup(response.text, 'html.parser')
+    # get all card-link class elements
+    cards = soup.find_all('a', class_='card-link')
+    # get the href attribute
+    for card in cards:
+        link_to_api_page = card.get('href')
+        try:
+            res = requests.get(baseurl+link_to_api_page)
+        except requests.exceptions.RequestException as e:
+            print(e, link_to_api_page)
+            continue
+        soup_res = BeautifulSoup(res.text, 'html.parser')
+        #get class api-details
+        api_details = soup_res.find('div', class_='api-details')
+        # get the name and link
+        dataModel['name'] = api_details.find('div', class_='title').text
+        dataModel['description'] = api_details.find('p').text
+        # get li elements
+        li_elements = api_details.find_all('li')
+        dataModel['auth'] = li_elements[2].text[7:] if len(li_elements) != '' else "No"
+        dataModel['type'] = li_elements[3].text[11:]
+
+        # get the link to the api
+        # get class btn btn-secondary
+        api_link = soup_res.find('button', class_='btn-secondary').find('a').get('href')[:-16]
+        dataModel['link'] = api_link
+        dataModel['tryMe'] = api_link
+        if not checkAlreadyExist(dataModel['name']):
+            dataModel['_id'] = util.getNextSequence('_id')
+            print(dataModel)
+            dbAPI.insert_one(dataModel)
+            print("inserted" + dataModel['name'])
+        else:
+            print("already exists", dataModel['name'])
+
+"""

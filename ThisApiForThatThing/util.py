@@ -11,6 +11,7 @@ try:
 
     collection_ApiForApi = db['ApiForApi']
     collection_MetaData = db['MetaData']
+    collection_Counter = db['Counter']
 
 except ServerSelectionTimeoutError:
     print("Server not found")
@@ -18,16 +19,11 @@ except ServerSelectionTimeoutError:
 
 
 def getNextSequence(name):
-    # TODO: getNextSequence
-    ...
+    newSequence = collection_Counter.find_one_and_update(
+        {'name': name},
+        {'$inc': {'seq': 1}},
+    )
+    return newSequence['seq']
 
 
-def incrementTypesCount(typeName):
-    # TODO: incrementTypesCount
-    ...
-
-
-def incrementTotalTypesCount():
-    # TODO: incrementTotalTypesCount
-    ...
 
