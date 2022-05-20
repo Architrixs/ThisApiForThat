@@ -19,23 +19,23 @@
             <a href="meta">MetaData</a>
         </div>
         <div class="tab">
-            <a href="auth">Auth</a>
+            <a href="types">Types</a>
         </div>
     </div>
 </div>
 <div class="card">
-    <div class="tab-content" id="types">
-        <h2>TYPES FORM</h2>
-        {% for type in types %}
+    <div class="tab-content" id="auth">
+        <h2>AUTH FORM</h2>
+        {% for auth in auths %}
             <div class="row">
-                <form action="{% url 'crudTypes' %}" method="post">{% csrf_token %}
+                <form action="{% url 'crudAuths' %}" method="post">{% csrf_token %}
                     <div class="col">
                         <div class="form-group"  style="display: none">
-                            <input type="text" name="original_type" value="{{ type }}" style="display: none">
+                            <input type="text" name="original_auth" value="{{ auth }}" style="display: none">
                         </div>
                         <div class="form-group">
                             {{ forloop.counter }}.
-                            <input type="text" name="type" value="{{ type }}" style="width: 80%;">
+                            <input type="text" name="auth" value="{{ auth }}" style="width: 80%;">
                         </div>
                     </div>
                     <div class="col">

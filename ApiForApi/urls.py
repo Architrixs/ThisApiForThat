@@ -17,7 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from django.views.generic.base import RedirectView
 from ThisApiForThatThing.views import MainPageView, RandomDataCall, TypeDataCall, AllTypes, \
-    CrudPageView, MetaDataCall, CrudPageViewWithId, CrudPageViewWithTypes, CrudPageViewWithMetaData
+    CrudPageView, MetaDataCall, CrudPageViewWithId, CrudPageViewWithTypes, CrudPageViewWithMetaData, \
+    CrudPageViewWithAuths
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,4 +31,5 @@ urlpatterns = [
     path('crud/', CrudPageView.as_view(), name='crud'),
     path('crud/types', CrudPageViewWithTypes.as_view(), name='crudTypes'),
     path('crud/meta', CrudPageViewWithMetaData.as_view(), name='crudMeta'),
+    path('crud/auth', CrudPageViewWithAuths.as_view(), name='crudAuths'),
 ]

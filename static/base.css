@@ -152,6 +152,9 @@ p {
   border-radius: 0px 0px 6px 6px;
 }
 @media screen and (max-width: 700px) {
+  body {
+  background-image: url("hand-painted-watercolor-background-with-sky-clouds-shape - R.jpg");
+  }
   .sidebar {padding-top: 15px;}
   .sidebar a {font-size: 18px;}
 /*  move class right to bottom of page*/

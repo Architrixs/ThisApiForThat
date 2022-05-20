@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     {% load static %}
     <link rel="stylesheet" href="{% static 'base.css' %}">
     <script src="{% static 'script.js' %}"></script>
@@ -12,7 +13,7 @@
         <h2>Hey, maybe you can use</h2>
         <h1>{{ api.name }}</h1>
         <h3>API for</h3>
-        <div class="center"><h4>{{ api.description }}{% if api.auth %}<br><span id="keyInfo">({{ api.auth }} {% if api.auth == ' No '  %}Key{% endif %} Needed )</span>{% endif %}</h4></div>
+        <div class="center"><h4>{{ api.description }}{% if api.auth != ''%}<br><span id="keyInfo">({{ api.auth }} {% if api.auth == 'No' %}Key{% endif %} Needed)</span>{% endif %}</h4></div>
 
     {# a button to get another random values #}
     <a href="{{ '' }}">

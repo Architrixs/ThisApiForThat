@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     {% load static %}
     <link rel="stylesheet" href="{% static 'form.css' %}">
     <script src="{% static 'script.js' %}"></script>
@@ -28,6 +29,9 @@
         <div class="tab">
             <a href="types">Types</a>
         </div>
+        <div class="tab">
+            <a href="auth">Auth</a>
+        </div>
     </div>
 </div>
 <div class="card">
@@ -37,7 +41,7 @@
         <div class="row">
             <form action="{% url 'crud' %}" method="get">
                 <div class="col">
-                    <div class="form-group" style="width: 20%;margin-top: 5px">
+                    <div id="id" class="form-group" style="width: 20%;margin-top: 5px">
                         <label for="name">Id</label>
                         <input type="number" name="id" value="{% if id %}{{ id }}{% endif %}">
                     </div>
@@ -61,7 +65,7 @@
         <div class="row">
             <form action="/crud/id={{ id }}" method="post">{% csrf_token %}
                 <div class="col">
-                    <div class="form-group" style="width: 50%;">
+                    <div id="name" class="form-group" style="width: 50%;">
                         <label>Name</label>
                         <input type="text" name="name" value="{% if data %}{{ data.name }}{% endif %}">
                     </div>

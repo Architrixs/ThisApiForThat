@@ -135,3 +135,17 @@ class CrudPageViewWithMetaData(View):
         data = list(collection_ApiForApi.distinct('type'))
         print(data)
         return render(request, 'typeForm.html', {'types': data})
+
+
+class CrudPageViewWithAuths(View):
+    def get(self, request):
+        data = list(collection_ApiForApi.distinct('auth'))
+        return render(request, 'authForm.html', {'auths': data})
+
+#     update type
+    def post(self, request):
+        auth = request.POST.get('auth')
+        original_auth = request.POST.get('original_auth')
+        # update all the data with the auth
+        collection_ApiForApi.update_many({'auth': original_auth}, {'$set': {'auth': auth}})
+        return redirect('crudAuths')
