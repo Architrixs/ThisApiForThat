@@ -42,6 +42,12 @@ h4 {
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
 }
+h5 {
+  color: #46bdf2;
+  font-size: 1.3em;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
 #keyInfo{
   font-size: 0.5em;
   -webkit-text-stroke-width: 0;
@@ -150,6 +156,21 @@ p {
   -webkit-border-radius: 0px 0px 6px 6px;
   -moz-border-radius: 0px 0px 6px 6px;
   border-radius: 0px 0px 6px 6px;
+}
+.chip {
+    padding: 0 12px;
+    background-color: #7c7c7c;
+    border-radius: 100px;
+    display: inline-flex;
+    margin: 4px;
+    color: rgb(10, 248, 103);
+    align-items: center;
+    height: 32px;
+    font-size: 14px;
+    border: none;
+}
+.git {
+
 }
 @media screen and (max-width: 700px) {
   body {

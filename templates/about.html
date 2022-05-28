@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+    <title>About</title>
+</head>
+<body>
+{# meta data #}
+<div class="content">
+    <h2>Total APIs : <span style="color: #7ef851">{{ data.Count }}</span></h2>
+    <h2>Total Types : <span style="color: #7ef851">{{ data.TotalTypes }}</span></h2>
+    <div class="chips__choice">
+        {% for t in data.Types %}
+            <div class="chip">{{ t }}</div>
+        {% endfor %}
+    </div>
+    <h2>Sources Added : </h2>
+    {% for s in data.Source %}
+        <h5>{{ s.source }} on {{ s.date }}</h5>
+    {% endfor %}
+</div>
+<a type="button" class="git" href="" title="Github">
+    Made with <img src="{% static 'icons8-diamond-heart-48.png' %}" style="width: 18px;height: 15px;" alt="heart"> by
+    Architrixs
+</a>
+</body>
+</html>

@@ -32,7 +32,7 @@
         </div>
         {# button for updating MetaData#}
         <div class="row">
-            <form action="/crud/meta" method="post">
+            <form action="{% url 'crudMeta' %}" method="post">{% csrf_token %}
                 <div class="col">
                     <input type="submit" value="Update MetaData">
                 </div>

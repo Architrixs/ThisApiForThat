@@ -32,7 +32,6 @@ except ServerSelectionTimeoutError:
 class MainPageView(View):
     def get(self, request):
         data = list(collection_ApiForApi.aggregate([{'$sample': {'size': 1}}]))[0]
-        print(data)
         # return the data
         return render(request, 'index.html', {'api': data})
 
@@ -42,7 +41,6 @@ class RandomDataCall(View):
     # returns a random document from the collection_ApiForApi
     def get(self, request):
         data = list(collection_ApiForApi.aggregate([{'$sample': {'size': 1}}]))[0]
-        print(data)
         # return the data
         return JsonResponse(data, status=201, safe=False)
 
@@ -50,7 +48,6 @@ class RandomDataCall(View):
 class TypeDataCall(View):
     # accepts the string as a GET parameter type and filters the data and returns all the data of that type
     def get(self, request, type):
-        print(request.GET)
         data = list(collection_ApiForApi.aggregate([{'$match': {'type': type}}]))
         return JsonResponse(data, status=201, safe=False)
 
@@ -80,8 +77,6 @@ class CrudPageView(View):
         if request.GET.get('id') is not None:
             oid = int(request.GET.get('id'))
         data = collection_ApiForApi.find_one({'_id': oid})
-        print(data, oid, id, request)
-        # return render(request, 'crud.html', {'data': data, 'id': oid})
         return redirect('crudId', id=oid)
 
     # post method to save the data
@@ -101,7 +96,6 @@ class CrudPageViewWithTypes(View):
         # get type from the page
         # get the data from the database
         data = list(collection_ApiForApi.distinct('type'))
-        print(data)
         return render(request, 'typeForm.html', {'types': data})
 
 #     update type
@@ -131,10 +125,18 @@ class CrudPageViewWithMetaData(View):
         return render(request, 'meta.html', {'data': data})
 
     def post(self, request):
-        # TODO: update meta data
-        data = list(collection_ApiForApi.distinct('type'))
-        print(data)
-        return render(request, 'typeForm.html', {'types': data})
+        typeData = list(collection_ApiForApi.distinct('type'))
+        # get total number of types
+        totalTypes = len(typeData)
+        # get total number of api
+        totalApi = collection_ApiForApi.count_documents({})
+
+        # update the data in the database
+        temp = list(collection_MetaData.find({'name': 'Types'}))
+        collection_MetaData.update_one({'name': 'Types'}, {'$set': {'value': typeData}})
+        collection_MetaData.update_one({'name': 'TotalTypes'}, {'$set': {'value': totalTypes}})
+        collection_MetaData.update_one({'name': 'Count'}, {'$set': {'value': totalApi}})
+        return redirect('crudMeta')
 
 
 class CrudPageViewWithAuths(View):
@@ -149,3 +151,13 @@ class CrudPageViewWithAuths(View):
         # update all the data with the auth
         collection_ApiForApi.update_many({'auth': original_auth}, {'$set': {'auth': auth}})
         return redirect('crudAuths')
+
+
+class AboutPageView(View):
+    def get(self, request):
+        # get meta data
+        data = requests.get(baseUrl + '/api/meta/').json()
+        # form a key, value pair from all the dicts in data list
+        metaData = {d['name']: d['value'] for d in data}
+        return render(request, 'about.html', {'data': metaData})
+

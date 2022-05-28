@@ -18,11 +18,12 @@ from django.urls import path
 from django.views.generic.base import RedirectView
 from ThisApiForThatThing.views import MainPageView, RandomDataCall, TypeDataCall, AllTypes, \
     CrudPageView, MetaDataCall, CrudPageViewWithId, CrudPageViewWithTypes, CrudPageViewWithMetaData, \
-    CrudPageViewWithAuths
+    CrudPageViewWithAuths, AboutPageView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', MainPageView.as_view(), name='home'),
+    path('about/', AboutPageView.as_view(), name='about'),
     path('api/random/', RandomDataCall.as_view(), name='random'),
     path('api/types/', AllTypes.as_view()),
     path('api/types/<str:type>', TypeDataCall.as_view(), name='type'),
