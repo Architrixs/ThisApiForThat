@@ -9,35 +9,52 @@
     <title>ThisApiForThat</title>
 </head>
 <body>
-    <div class="content">
-        <h2>Hey, maybe you can use</h2>
-        <h1>{{ api.name }}</h1>
-        <h3>API for</h3>
-        <div class="center"><h4>{{ api.description }}{% if api.auth != ''%}<br><span id="keyInfo">({{ api.auth }} {% if api.auth == 'No' %}Key{% endif %} Needed)</span>{% endif %}</h4></div>
+<div class="content">
+    <h2>Hey, maybe you can use</h2>
+    <h1>{{ api.name }}</h1>
+    <h3>API for</h3>
+    <div class="center"><h4>{{ api.description }}{% if api.auth != '' %}<br>
+        <span id="keyInfo">({{ api.auth }} {% if api.auth == 'No' %}Key{% endif %} Needed)</span>{% endif %}</h4></div>
 
     {# a button to get another random values #}
     <a href="{{ '' }}">
         <button class="button" id="refresh">Get Another</button>
     </a>
-{#    div on right side for code example#}
+    {#    div on right side for code example#}
     <div class="right">
-        <a href="{{ api.tryMe }}" target="_blank"><div class="codeheader" id="codeheader_html" title="click">Try API</div></a>
+        <a href="{{ api.tryMe }}" target="_blank">
+            <div class="codeheader" id="codeheader_html" title="click">Try API</div>
+        </a>
         <div id="codebox">
             <code>
                 <p>{{ api.tryMe }}</p>
             </code>
         </div>
     </div>
-         </div>
-    {#    setting icon on which click open a menu #}
-    <div id="mySidebar" class="sidebar">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-        <br>
-        <a href="{% url 'about' %}">About</a>
-        <a href="#">API</a>
+</div>
+{#    setting icon on which click open a menu #}
+<div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <br><br><br>
+    <a href="{% url 'about' %}">About</a>
+    <br>
+    <div id="ApiForApi">
+        ApiForApi<br>
+        end points:<br><br>
+        <code id="endpoints">
+            api/random/<br><br>
+            api/types/<br><br>
+            api/types/{string: type}/<br><br>
+            api/meta/<br>
+        </code>
     </div>
-    <a class="icon-info">
-        <img src="{% static 'info-64.png' %}" alt="icon" onclick="openNav()" class="openbtn">
+    <br><br>
+    <a href="https://github.com/Architrixs">
+    <img src="{% static 'Github-Mark-Light-32px.png' %}" alt="logo" id="logo">
     </a>
+</div>
+<a class="icon-info">
+    <img src="{% static 'info-64.png' %}" alt="icon" onclick="openNav()" class="openbtn">
+</a>
 </body>
 </html>
