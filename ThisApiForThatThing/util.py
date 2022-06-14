@@ -1,10 +1,12 @@
 from pymongo import MongoClient
 from pymongo.errors import ServerSelectionTimeoutError
+from django.conf import settings
 
 # connect to mongodb
 try:
-    password = 'fcPZp2f4ixQ5QJpj'
-    databaseName = 'Api'
+    if settings:
+        password = settings.PASSWORD
+        databaseName = settings.NAME
     client = MongoClient(
         f"mongodb+srv://Architrixs:{password}@cluster0.do1dd.mongodb.net/{databaseName}?retryWrites=true&w=majority")
     db = client['Api']

@@ -11,6 +11,13 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import environ
+# Initialise environment
+env = environ.Env()
+environ.Env.read_env()
+NAME = env('DATABASE_NAME')
+USER = env('DATABASE_USER')
+PASSWORD = env('DATABASE_PASS')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +32,7 @@ SECRET_KEY = 'django-insecure-j@3q$^hwh^w--0e)_bo@c+_k0lq5xceb#v2!-8-$yik#d55_yu
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.5', 'localhost', ]
+ALLOWED_HOSTS = ['192.168.1.5', 'localhost', '127.0.0.1']
 
 
 # Application definition

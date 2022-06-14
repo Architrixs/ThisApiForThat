@@ -10,15 +10,18 @@ import json
 from .models import ApiModel
 import ThisApiForThatThing.util as util
 
+from django.conf import settings
 # Create your views here.
 baseUrl = "http://localhost:8000"
 # connect to mongodb
 try:
-    password = 'fcPZp2f4ixQ5QJpj'
-    databaseName = 'Api'
-    client = MongoClient(
-        f"mongodb+srv://Architrixs:{password}@cluster0.do1dd.mongodb.net/{databaseName}?retryWrites=true&w=majority")
-    db = client['Api']
+    # get password from settings.py databases
+    if settings:
+        password = settings.PASSWORD
+        databaseName = settings.NAME
+        client = MongoClient(
+            f"mongodb+srv://Architrixs:{password}@cluster0.do1dd.mongodb.net/{databaseName}?retryWrites=true&w=majority")
+        db = client['Api']
 
     collection_ApiForApi = db['ApiForApi']
     collection_MetaData = db['MetaData']
