@@ -12,6 +12,7 @@ from bs4 import BeautifulSoup
 from pymongo import MongoClient
 from pymongo.errors import ServerSelectionTimeoutError
 import ThisApiForThatThing.util as util
+from django.conf import settings
 
 pp = pprint.PrettyPrinter(indent=4)
 # api data model
@@ -27,9 +28,11 @@ dataModel = {
 }
 
 # make a connection to the MongoDB database
-password = 'fcPZp2f4ixQ5QJpj'
-databaseName = 'Api'
-client = MongoClient(f"mongodb+srv://Architrixs:{password}@cluster0.do1dd.mongodb.net/{databaseName}?retryWrites=true&w=majority")
+if settings:
+    password = settings.PASSWORD
+    databaseName = settings.NAME
+    client = MongoClient(
+        f"mongodb+srv://Architrixs:{password}@cluster0.do1dd.mongodb.net/{databaseName}?retryWrites=true&w=majority")
 
 # check if the connection is successful
 try:
@@ -42,11 +45,13 @@ except ServerSelectionTimeoutError:
 dbAPI = client['Api']['ApiForApi']
 print(dbAPI.find_one())
 
+
 def checkAlreadyExist(name):
     # check if same name exists
     if dbAPI.find_one({"name": name}) is None:
         return False
     return True
+
 # scrape data from the various sources
 
 # ------------------------------------ #
