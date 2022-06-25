@@ -30,13 +30,30 @@ except ServerSelectionTimeoutError:
     exit()
 
 
+def setCookie(response, request, totalViews):
+    # if cookie viewCount_ThisApiForThat exists don't do anything otherwise increment it
+    if request.COOKIES.get('viewCount_ThisApiForThat') is None:
+        # update totalViews in mongodb
+        collection_MetaData.update_one(
+            {'name': 'Views'},
+            {'$inc': {'value': 1}}
+        )
+        response.set_cookie('viewCount_ThisApiForThat', totalViews + 1, max_age=60 * 60 * 24)
+
+    else:
+        response.set_cookie('viewCount_ThisApiForThat', totalViews, max_age=60 * 60 * 24)
+
+
 # section for webpage
 # main page
 class MainPageView(View):
     def get(self, request):
+        totalViews = list(collection_MetaData.find({'name': 'Views'}))[0]['value']
         data = list(collection_ApiForApi.aggregate([{'$sample': {'size': 1}}]))[0]
-        # return the data
-        return render(request, 'index.html', {'api': data})
+        response = render(request, 'index.html', {'api': data, 'totalViews': totalViews})
+        setCookie(response, request, totalViews)
+        print("Hit : ", request.COOKIES.get('viewCount_ThisApiForThat'))
+        return response
 
 
 # section for api calls
