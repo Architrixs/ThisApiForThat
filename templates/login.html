@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{#  a django login form  #}
+<form action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    <label for="username">Username:</label>
+    <input type="text" name="username" id="username">
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password">
+{# hint and error messages #}
+    {% if message %}
+            <p style="color: red">{{ message }}</p>
+    {% endif %}
+    {# next #}
+    <input type="hidden" name="next" value="{% url 'crud' %}">
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>

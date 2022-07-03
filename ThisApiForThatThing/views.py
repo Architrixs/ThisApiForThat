@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.views import View
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 from pymongo import MongoClient
 from pymongo.errors import ServerSelectionTimeoutError
 from django.http import JsonResponse
@@ -25,6 +26,7 @@ try:
 
     collection_ApiForApi = db['ApiForApi']
     collection_MetaData = db['MetaData']
+    collection_Users = db['Users']
 except ServerSelectionTimeoutError:
     print("Server not found")
     exit()
@@ -88,7 +90,7 @@ class CrudPageViewWithId(View):
 
 
 # section for modifying data for admin
-class CrudPageView(View):
+class CrudPageView(LoginRequiredMixin, View):
     # takes 'id' input from page and returns the data with that id
     # here we can modify the data and save it to the database
     def get(self, request):
@@ -181,3 +183,35 @@ class AboutPageView(View):
         metaData = {d['name']: d['value'] for d in data}
         return render(request, 'about.html', {'data': metaData})
 
+
+# section for login and logout
+def authenticate(username, password):
+    """
+    Authenticate a user based on username and password.
+    returns tuple of (True/False, message)
+    """
+    # get the user password and salt
+    user = collection_Users.find_one({"Username": username})
+    if user is None:
+        return False, "User not found"
+    # print(user)
+    else:
+        value = util.is_correct_password(user['PasswordSalt'], user['PasswordHash'], password)
+        if value:
+            return True, "User found"
+        else:
+            return False, "Password incorrect"
+
+
+class LoginView(View):
+    def get(self, request):
+        return render(request, 'login.html')
+
+    def post(self, request):
+        username = request.POST.get('username')
+        passwrd = request.POST.get('password')
+        Authorized, Message = authenticate(username, passwrd)
+        if Authorized:
+            return redirect('crudId', id=1)
+        else:
+            return render(request, 'login.html', {'message': Message})

@@ -26,16 +26,15 @@ dataModel = {
     "auth": "",
     "working": True,
 }
-
-# make a connection to the MongoDB database
-if settings:
-    password = settings.PASSWORD
-    databaseName = settings.NAME
-    client = MongoClient(
-        f"mongodb+srv://Architrixs:{password}@cluster0.do1dd.mongodb.net/{databaseName}?retryWrites=true&w=majority")
-
-# check if the connection is successful
 try:
+# make a connection to the MongoDB database
+    if settings:
+        password = settings.PASSWORD
+        databaseName = settings.NAME
+        client = MongoClient(
+            f"mongodb+srv://Architrixs:{password}@cluster0.do1dd.mongodb.net/{databaseName}?retryWrites=true&w=majority")
+
+    # check if the connection is successful
     client.admin.command('ismaster')
 except ServerSelectionTimeoutError:
     print('Server not available')
@@ -43,6 +42,7 @@ except ServerSelectionTimeoutError:
 
 # get the database
 dbAPI = client['Api']['ApiForApi']
+dbUser = client['Api']['Users']
 print(dbAPI.find_one())
 
 
