@@ -1,0 +1,78 @@
+body {
+    background-color: #FAFAFA;
+    color: #DCDCDC;
+    font-family: Open Sans;
+    font-size: 20px;
+}
+
+/* class which will be a background for all other elements */
+/* this only contains text, which will be enlarged to fill up whole viewport*/
+.background {
+    opacity: 0.7;
+    background-color: #FAFAFA;
+    font-family: lato;
+    text-transform: uppercase;
+    font-size: 11em;
+    text-align: center;
+    margin: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.login-box {
+    text-align: center;
+    width: 20vw;
+    background-color: rgba(129, 117, 117, 0.49);
+    padding: 10px;
+
+}
+
+.logo {
+    height: 70px;
+    margin-bottom: 30px;
+}
+
+.form-control {
+    margin-bottom: 20px;
+    width: 70%;
+}
+
+::placeholder {
+    color: deeppink;
+}
+
+input[type=text], input[type=password] {
+    border: 1px solid #f1b299;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #f2f2f2;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+.btn {
+    width: 40%;
+    background-color: #f1b299;
+    border: 1px solid black;
+    color: white;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+

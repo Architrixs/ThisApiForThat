@@ -84,16 +84,23 @@ class AllTypes(View):
 
 class CrudPageViewWithId(View):
     def get(self, request, id) -> HttpResponse:
+        print(request.session.items())
+        if request.session.get('authenticated') is not True:
+            return redirect('login')
         oid = id
         data = collection_ApiForApi.find_one({'_id': oid})
         return render(request, 'crud.html', context={'data': data, 'id': oid})
 
 
 # section for modifying data for admin
-class CrudPageView(LoginRequiredMixin, View):
+class CrudPageView(View):
     # takes 'id' input from page and returns the data with that id
     # here we can modify the data and save it to the database
     def get(self, request):
+        print(request.session.items())
+        if request.session.get('authenticated') is not True:
+            return redirect('login')
+        print("already logged in", request.session.get('authenticated'))
         # get the id from the page
         oid = 1
         if request.GET.get('id') is not None:
@@ -115,6 +122,9 @@ class CrudPageView(LoginRequiredMixin, View):
 
 class CrudPageViewWithTypes(View):
     def get(self, request):
+        print(request.session.items())
+        if request.session.get('authenticated') is not True:
+            return redirect('login')
         # get type from the page
         # get the data from the database
         data = list(collection_ApiForApi.distinct('type'))
@@ -141,6 +151,11 @@ class MetaDataCall(View):
 
 class CrudPageViewWithMetaData(View):
     def get(self, request):
+        # check if the session is authenticated
+        # print session values
+        print(request.session.items(), request.session.get('expired'))
+        if request.session.get('authenticated') is not True:
+            return redirect('login')
         data = requests.get(baseUrl + '/api/meta/')
         # prettyfy the json
         data = json.dumps(data.json(), indent=4, sort_keys=True)
@@ -163,6 +178,9 @@ class CrudPageViewWithMetaData(View):
 
 class CrudPageViewWithAuths(View):
     def get(self, request):
+        print(request.session.items())
+        if request.session.get('authenticated') is not True:
+            return redirect('login')
         data = list(collection_ApiForApi.distinct('auth'))
         return render(request, 'authForm.html', {'auths': data})
 
@@ -212,6 +230,12 @@ class LoginView(View):
         passwrd = request.POST.get('password')
         Authorized, Message = authenticate(username, passwrd)
         if Authorized:
+            # set the user in the session
+            request.session['user'] = username
+            # set the user as authenticated in request
+            request.session['authenticated'] = True
+            # set the session expiration time fo r browser close
+            request.session.set_expiry(0)
             return redirect('crudId', id=1)
         else:
             return render(request, 'login.html', {'message': Message})

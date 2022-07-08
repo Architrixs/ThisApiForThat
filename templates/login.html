@@ -2,23 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'login.css' %}">
+    <title>LOGIN</title>
 </head>
 <body>
+{#add a div with simple large text which will be a background for all other elements#}
+<div class="background">
+
+<span style="color: red;">U</span> <span style="color: gold;">Can’t</span>
+    <span style="font-size: larger"></span><br>
+    <span style="color: blueviolet;">Touch</span> <span style="color: greenyellow;">This</span>
+
+</div>
 {#  a django login form  #}
-<form action="{% url 'login' %}" method="post">
-    {% csrf_token %}
-    <label for="username">Username:</label>
-    <input type="text" name="username" id="username">
-    <label for="password">Password:</label>
-    <input type="password" name="password" id="password">
-{# hint and error messages #}
-    {% if message %}
-            <p style="color: red">{{ message }}</p>
-    {% endif %}
-    {# next #}
-    <input type="hidden" name="next" value="{% url 'crud' %}">
-    <input type="submit" value="Submit">
-</form>
+<div class="center login-box">
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="username" id="username" class="form-control" placeholder="Username">
+        <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+        <br>
+        {# hint and error messages #}
+        {% if message %}
+            <span style="color: red" id="message" data-attribute="{{ message }}">{{ message }}</span>
+        {% endif %}
+        <br>
+        {# next #}
+        {{ next }}
+        <input type="hidden" name="next" value="{% url 'crud' %}">
+        <input type="submit" value="Submit" class="btn">
+    </form>
+</div>
 </body>
 </html>
