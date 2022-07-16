@@ -12,7 +12,7 @@ body {
     background-color: #FAFAFA;
     font-family: lato;
     text-transform: uppercase;
-    font-size: 11em;
+    font-size: 16vw;
     text-align: center;
     margin: 0;
     position: absolute;
@@ -75,4 +75,14 @@ input[type=text], input[type=password] {
     cursor: pointer;
 }
 
-
+@media screen and (max-width: 700px) {
+    body{
+        font-size: 10px;
+    }
+    .background {
+        font-size: 25vw;
+    }
+    .login-box {
+        width: 60vw;
+    }
+}
