@@ -13,7 +13,7 @@ import ThisApiForThatThing.util as util
 
 from django.conf import settings
 # Create your views here.
-baseUrl = "http://localhost:8000"
+baseUrl = "https://thisapiforthat.herokuapp.com"
 # connect to mongodb
 try:
     # get password from settings.py databases
