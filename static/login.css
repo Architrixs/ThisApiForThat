@@ -85,4 +85,7 @@ input[type=text], input[type=password] {
     .login-box {
         width: 60vw;
     }
+    btn {
+        width: 60%;
+    }
 }
