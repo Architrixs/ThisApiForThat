@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Asap:wght@600&display=swap');
 /*add a abstract backgroung image*/
 body {
-    background-image: url("hand-painted-watercolor-background-with-sky-clouds-shape.jpg");
+    background-image: url("hand-painted-watercolor-background-with-sky-clouds-shape-min.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -213,7 +213,7 @@ p {
 
 @media screen and (max-width: 700px) {
     body {
-        background-image: url("hand-painted-watercolor-background-with-sky-clouds-shape - R.jpg");
+        background-image: url("hand-painted-watercolor-background-with-sky-clouds-shape - R-min.jpg");
     }
 
     .sidebar {
