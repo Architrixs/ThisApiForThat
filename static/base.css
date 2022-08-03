@@ -22,28 +22,28 @@ a {
 
 h2 {
     color: #fd976e;
-    font-size: 3.5em;
+    font-size: 3.0em;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
 }
 
 h3 {
     color: #fd976e;
-    font-size: 2.5em;
+    font-size: 2.0em;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
 }
 
 h1 {
     color: #46bdf2;
-    font-size: 4em;
+    font-size: 3.5em;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
 }
 
 h4 {
     color: #46bdf2;
-    font-size: 1.7em;
+    font-size: 1.53em;
     letter-spacing: 2px;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
@@ -57,7 +57,7 @@ h5 {
 }
 
 #keyInfo {
-    font-size: 0.5em;
+    font-size: 0.7em;
     -webkit-text-stroke-width: 0;
 }
 
@@ -137,7 +137,7 @@ p {
 
 .sidebar #ApiForApi {
     padding: 8px 8px 8px 32px;
-    font-size: 22px;
+    font-size: 1.3em;
     color: #818181;
     display: block;
     transition: 0.5s;
@@ -146,7 +146,7 @@ p {
     color: #f1f1f1;
 }
 #endpoints {
-    font-size: 18px;
+    font-size: 1em;
     color: #818181;
     display: block;
     transition: 0.2s;
