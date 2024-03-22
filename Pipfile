@@ -13,7 +13,7 @@ pymongo[srv] = "*"
 gunicorn = "*"
 whitenoise = "*"
 dj-database-url = "*"
-psycopg2 = "*"
+psycopg2-binary = "*"
  
 [requires]
 python_version = "3.9"
