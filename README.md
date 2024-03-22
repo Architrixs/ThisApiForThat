@@ -1,4 +1,4 @@
-![Heroku](https://heroku-badge.herokuapp.com/?app=thisapiforthat)
+
 # ThisApiForThat
 
 A project in django, a site which can be helpful for all the new and old developers to divulge into the world of APIs.
@@ -7,7 +7,7 @@ A project in django, a site which can be helpful for all the new and old develop
 - Need an API to play around with ?
 - Making a hobby project but need an Idea ?
 
-Just head to the [ThisApiForThat](https://thisapiforthat.herokuapp.com/) and get a random API to work with.
+
 
 ## API Reference
 Hey! And talking about API, how could there not be an APIforAPIs:
