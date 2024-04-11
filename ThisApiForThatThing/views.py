@@ -10,10 +10,10 @@ from django.http import JsonResponse
 import json
 from .models import ApiModel
 import ThisApiForThatThing.util as util
+import ast
 
 from django.conf import settings
 # Create your views here.
-baseUrl = "https://thisapiforthat.herokuapp.com"
 # connect to mongodb
 try:
     # get password from settings.py databases
@@ -156,7 +156,9 @@ class CrudPageViewWithMetaData(View):
         print(request.session.items(), request.session.get('expired'))
         if request.session.get('authenticated') is not True:
             return redirect('login')
-        data = requests.get(baseUrl + '/api/meta/')
+        metadata_response = MetaDataCall.as_view()(request)
+
+        data = json.loads(metadata_response.content)
         # prettyfy the json
         data = json.dumps(data.json(), indent=4, sort_keys=True)
         return render(request, 'meta.html', {'data': data})
@@ -195,8 +197,10 @@ class CrudPageViewWithAuths(View):
 
 class AboutPageView(View):
     def get(self, request):
-        # get meta data
-        data = requests.get(baseUrl + '/api/meta/').json()
+        # get meta data, using MetaDataCall
+        metadata_response = MetaDataCall.as_view()(request)
+
+        data = json.loads(metadata_response.content)
         # form a key, value pair from all the dicts in data list
         metaData = {d['name']: d['value'] for d in data}
         return render(request, 'about.html', {'data': metaData})
