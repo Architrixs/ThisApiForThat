@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'base.css' %}">
-    <script src="{% static 'script.js' %}"></script>
-    <title>ThisApiForThat</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
 <div class="content">
     <h2>Hey, maybe you can use</h2>
     <h1>{{ api.name }}</h1>
@@ -58,5 +51,4 @@
 <a class="icon-info">
     <img src="{% static 'info-64.png' %}" alt="icon" onclick="openNav()" class="openbtn">
 </a>
-</body>
-</html>
+{% endblock content %}

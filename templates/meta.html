@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'form.css' %}">
-    <script src="{% static 'script.js' %}"></script>
-    <title>crud/meta</title>
-</head>
-<body>
+{% extends 'base_crud.html' %}
+{% load static %}
+{% block content %}
 
 <div class="sidebar">
     <div class="tabs">
@@ -41,5 +33,4 @@
     </div>
 </div>
 
-</body>
-</html>
+{% endblock %}

@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'base.css' %}">
-    <title>About</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
 {# meta data #}
 <div class="content">
     <h2>Total APIs : <span style="color: #7ef851">{{ data.Count }}</span></h2>
@@ -26,5 +20,4 @@
     Made with <img src="{% static 'icons8-diamond-heart-48.png' %}" style="width: 18px;height: 15px;" alt="heart"> by
     Architrixs
 </a>
-</body>
-</html>
+{% endblock %}

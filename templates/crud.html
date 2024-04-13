@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'form.css' %}">
-    <script src="{% static 'script.js' %}"></script>
-    <title>CRUD</title>
-</head>
-<body>
+{% extends 'base_crud.html' %}
+{% load static %}
+{% block content %}
 
 {# make a form for updating or adding entries to api database according to ApiModel #}
 {#name = models.CharField(max_length=100)#}
@@ -115,6 +107,4 @@
         </div>
     </div>
 </div>
-
-</body>
-</html>
+{% endblock %}
