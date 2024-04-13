@@ -43,8 +43,12 @@ except ServerSelectionTimeoutError:
 # get the database
 dbAPI = client['Api']['ApiForApi']
 dbUser = client['Api']['Users']
-print(dbAPI.find_one())
 
+
+# fetch the last id
+def getLastId():
+    last = dbAPI.find_one(sort=[('_id', -1)])
+    return last['_id']
 
 def checkAlreadyExist(name):
     # check if same name exists
@@ -123,20 +127,22 @@ print("tryme", trs[1].find_all('a')[1].text)
 index = 1421
 for tr in trs[1:]:
     data = tr.find_all('a')
-    description = tr.find_all('td')[2].text
+    td = tr.find_all('td')
+    description = td[3].text
     dataModel['_id'] = index
     dataModel['name'] = data[0].text
     dataModel['link'] = data[0].get('href')
     dataModel['description'] = description
-    dataModel['type'] = 'Miscellaneous'
+    dataModel['type'] = td[1].text
     dataModel['tryMe'] = data[1].text
     dataModel['auth'] = 'No'
-    pp.pprint(dataModel)
+    # pp.pprint(dataModel)
     # sleep for a bit
-    time.sleep(1)
+    # time.sleep(1)
     # check if same name exists
     if dbAPI.find_one({"name": dataModel['name']}) is None:
-        dbAPI.insert_one(dataModel)
+        print("new", dataModel['name'])
+        # dbAPI.insert_one(dataModel)
     else:
         print("already exists", dataModel['name'])
     index = index + 1

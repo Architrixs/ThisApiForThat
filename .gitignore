@@ -138,3 +138,6 @@ GitHub.sublime-settings
 
 # Database
 *.sqlite3
+staticfiles/
+django/
+ThisApiForThatThing/migrations/*

@@ -160,7 +160,7 @@ class CrudPageViewWithMetaData(View):
 
         data = json.loads(metadata_response.content)
         # prettyfy the json
-        data = json.dumps(data.json(), indent=4, sort_keys=True)
+        data = json.dumps(data, indent=4, sort_keys=True)
         return render(request, 'meta.html', {'data': data})
 
     def post(self, request):
